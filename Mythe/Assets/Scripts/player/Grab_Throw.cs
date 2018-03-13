@@ -5,21 +5,21 @@ public class Grab_Throw : MonoBehaviour
 {
 
     public bool grabbed;
-    RaycastHit2D hit;
-    public float distance = 2f;
+    RaycastHit hit;
+    public int distance = 2;
     public Transform holdpoint;
     public float throwforce;
     public LayerMask notgrabbed;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (!grabbed)
             {
-                Physics2D.queriesStartInColliders = false;
+                Physics queriesStartInColliders = false;
 
-                hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, distance);
+                hit = Physics.Raycast(transform.position, Vector3.right * transform.localScale.x, distance);
 
                 if (hit.collider != null && hit.collider.tag == "grabbable")
                 {
@@ -31,10 +31,10 @@ public class Grab_Throw : MonoBehaviour
             {
                 grabbed = false;
 
-                if (hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+                if (hit.collider.gameObject.GetComponent<Rigidbody>() != null)
                 {
 
-                    hit.collider.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x, 1) * throwforce;
+                    hit.collider.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(transform.localScale.x, 1) * throwforce;
                 }
             }
         }
