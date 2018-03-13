@@ -4,30 +4,63 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour {
 
-    public enum jumpState {none, falling, rising };
-    private jumpState state = jumpState.none;
+    public enum jumpState {none, falling, rising, midair};
+    public float maxHeight;
+    public float ySpeed;
+
+    private jumpState _state = jumpState.none;
+    private Rigidbody _rigidbody;
+    private float originalHeight;
     void Start () {
-		
+        _rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        JumpRoutine();
 	}
-    void jump()
+    private void JumpRoutine()
     {
-        if (Input.GetKey(KeyCode.Space))
+        switch (_state)
         {
-            //print("pressing");
-            PlayerPhysics_.velocity = new Vector2(PlayerPhysics_.velocity.x, ySpeed * _Speed_);
-            state = jumpState.rising;
-
-        }
-        if (Input.GetKeyUp(KeyCode.Space) || (originalPos + maxHeight) <= transform.position.x)
-        {
-            //print("released");
-            state = jumpState.falling;
-        }
-
+            case jumpState.none:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    originalHeight = transform.position.y;
+                    _state = jumpState.rising;
+                }
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    //print("pressing");
+                    gameObject.transform.Translate(Vector3.up * ySpeed * Time.deltaTime);
+                }
+                break;
+            case jumpState.rising:
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    //print("pressing");
+                    gameObject.transform.Translate(Vector3.up * ySpeed * Time.deltaTime);
+                }
+                if (Input.GetKeyUp(KeyCode.Space) || (originalHeight + maxHeight) <= transform.position.x)
+                {
+                    //print("released");
+                    _state = jumpState.midair;
+                }
+                break;
+            case jumpState.midair:
+                if (_rigidbody.velocity.y == 0)
+                {
+                    _state = jumpState.falling;
+                }
+                _rigidbody.AddForce(Vector3.down * Time.deltaTime * 0.5f);
+                break;
+            case jumpState.falling:
+                Ray ray = new Ray(transform.position,Vector3.down);
+                if (false)
+                {
+                    _state = jumpState.none;
+                }
+                break;
+        }                
     }
 }
