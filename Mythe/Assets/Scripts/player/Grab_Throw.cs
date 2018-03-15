@@ -17,9 +17,9 @@ public class Grab_Throw : MonoBehaviour
         {
             if (!grabbed)
             {
-                Physics queriesStartInColliders = false;
+             //   Physics queriesStartInColliders = false;
 
-                hit = Physics.Raycast(transform.position, Vector3.right * transform.localScale.x, distance);
+             //   hit = Physics.Raycast(transform.position, Vector3.right * transform.localScale.x, distance);
 
                 if (hit.collider != null && hit.collider.tag == "grabbable")
                 {
