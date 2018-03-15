@@ -5,13 +5,15 @@ using UnityEngine;
 public class Jump : MonoBehaviour {
 
     public enum jumpState {none, falling, rising, midair, landing};
+    public jumpState state = jumpState.none;
+
     public float maxHeight;
     public float jumpMultiplier;
     public float maxJumpSpeed;
     public float maxFallSpeed;
     public float landingLag = 0.5f;
+    public bool canJump = true;
 
-    private jumpState _state = jumpState.none;
     private Rigidbody _rigidbody;
     private float _originalHeight;
     private float _landTime;
@@ -21,30 +23,32 @@ public class Jump : MonoBehaviour {
 	}
 	
 	void Update () {
-        Debug.Log(_state);
+        Debug.Log(state);
         JumpRoutine();
         RoutineSwitch();
         //Debug.Log(_rigidbody.velocity.y);
     }
     private void JumpRoutine()
     {
-        switch (_state)
+        switch (state)
         {
             case jumpState.none:
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space) && canJump)
                 {
-                    _rigidbody.velocity.Set(_rigidbody.velocity.x, maxJumpSpeed, _rigidbody.velocity.z);
+                    //_rigidbody.AddForce(Vector3.up * jumpMultiplier * Time.deltaTime, ForceMode.Force);
+
+                    _rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier*20 * Time.deltaTime;
                 }
                 break;
             case jumpState.rising:
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    Debug.Log("pressing");
-                    _rigidbody.velocity += new Vector3(0,1) * jumpMultiplier * Time.deltaTime;
-                }
+                
                 if (_rigidbody.velocity.y >= maxJumpSpeed)
                 {
-                    _rigidbody.velocity.Set(_rigidbody.velocity.x, maxJumpSpeed, _rigidbody.velocity.z);
+                    _rigidbody.velocity += new Vector3(0,1) * jumpMultiplier/2 * Time.deltaTime;
+                }else if (Input.GetKey(KeyCode.Space))
+                {
+                    Debug.Log("pressing");
+                    _rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier * Time.deltaTime;
                 }
                 break;
             case jumpState.falling:
@@ -59,36 +63,35 @@ public class Jump : MonoBehaviour {
     {
         if (_rigidbody.velocity.y < 0)
         {
-            _state = jumpState.falling;
+            state = jumpState.falling;
         }
-        switch (_state)
+        switch (state)
         {
             case jumpState.rising:
                 if (Input.GetKeyUp(KeyCode.Space) || (_originalHeight + maxHeight) <= transform.position.y)
                 {
-                    
-                    _state = jumpState.falling;
+                    state = jumpState.falling;
                 }
                 break;
             case jumpState.landing:
                 if (Time.time - _landTime >= landingLag)
                 {
-                    _state = jumpState.none;
+                    state = jumpState.none;
                     _landTime = 0;
                 }
                 break;
             case jumpState.falling:
                 if (IsGrounded())
                 {
-                    _state = jumpState.landing;
+                    state = jumpState.landing;
                     _landTime = Time.time;
                 }
                 break;
             case jumpState.none:
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKey(KeyCode.Space) && canJump)
                 {
                     _originalHeight = transform.position.y;
-                    _state = jumpState.rising;
+                    state = jumpState.rising;
                 }
                 break;
         }
@@ -104,7 +107,6 @@ public class Jump : MonoBehaviour {
         {
             if (hit.distance <= (GetComponent<SpriteRenderer>().sprite.rect.height / 2))
             {
-                Debug.Log("Landed");
                 return true;
             }
         }
