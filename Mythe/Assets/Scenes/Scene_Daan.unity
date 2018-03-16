@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 1159605240}
   - component: {fileID: 1159605244}
   - component: {fileID: 1159605245}
+  - component: {fileID: 1159605246}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -311,7 +312,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0, z: 0}
 --- !u!54 &1159605241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -395,11 +396,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ad6c6571fd6454ba6a687fe946dab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   maxHeight: 2
   jumpMultiplier: 15
   maxJumpSpeed: 2
   maxFallSpeed: 1
   landingLag: 0.5
+  canJump: 1
 --- !u!114 &1159605245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +414,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b1df3a67cf52e4d9d0ab3feabbcca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   moveSpeed: 2
+--- !u!114 &1159605246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159605239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1a1e840a0874e4daa9f3cd44f00268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  crawlMultiplier: 0.5
+  collisionMultiplier: 0.5
+  crawlSpeedMultiplier: 0.3
 --- !u!1 &1167127088
 GameObject:
   m_ObjectHideFlags: 0
