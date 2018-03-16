@@ -3,10 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
   tags:
   - grabbable
   - throwObject
   - MoveAble
+=======
+  tags: []
+>>>>>>> a3ef4568f07e74a0f96fa292954cf040fe4a4c2e
   layers:
   - Default
   - TransparentFX
