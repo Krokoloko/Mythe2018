@@ -41,7 +41,17 @@ public class Drag : MonoBehaviour
                 Dragging = false;
                 if (target.tag == "throwObject")
                 {
-                    target.GetComponent<Rigidbody>().AddForce(new Vector3(0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
+                    if (transform.position.x > target.transform.position.x)
+                    {
+                        Debug.Log("Player is colliding on target's right side");
+                        target.GetComponent<Rigidbody>().AddForce(new Vector3(-0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
+                    }
+                    else if (transform.position.x < target.transform.position.x)
+                    {
+                        Debug.Log("Player is colliding on target's left side");
+                        target.GetComponent<Rigidbody>().AddForce(new Vector3(0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
+                    }
+                    
                 }
                 else
                 {
@@ -50,6 +60,7 @@ public class Drag : MonoBehaviour
                 }
             }
         }
+       
     }
 
     void OnCollisionStay(Collision other)
