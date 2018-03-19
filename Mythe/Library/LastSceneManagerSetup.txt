@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Scene_Volken.unity
-=======
-- path: Assets/Scenes/Scene_Nick.unity
->>>>>>> 832b0690d35b1cd39600071c967445cac15bc996
   isLoaded: 1
   isActive: 1
