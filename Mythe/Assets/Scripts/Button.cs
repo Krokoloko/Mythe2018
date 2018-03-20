@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Button : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public bool active = false;
+
+
+void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            active = true;
+            print("nyess");
+        }
+    }
+void OnCollisionExit()
+    {
+        active = false;
+    }
 }
