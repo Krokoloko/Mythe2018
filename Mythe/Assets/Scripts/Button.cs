@@ -9,7 +9,7 @@ public class Button : MonoBehaviour {
 
 void OnCollisionStay(Collision col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "MoveAble")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "MoveAble" || col.gameObject.tag == "ThrowObject" || col.gameObject.tag == "Enemy")
         {
             active = true;
             print("nyess");
