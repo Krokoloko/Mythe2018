@@ -497,7 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHeight: 50
-  jumpMultiplier: 8
+  jumpMultiplier: 10
   maxJumpSpeed: 10
   maxFallSpeed: 8
   landingLag: 0.5
