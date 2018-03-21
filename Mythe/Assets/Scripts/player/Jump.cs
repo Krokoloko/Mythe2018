@@ -26,7 +26,6 @@ public class Jump : MonoBehaviour {
         Debug.Log(state);
         JumpRoutine();
         RoutineSwitch();
-        //Debug.Log(_rigidbody.velocity.y);
     }
     private void JumpRoutine()
     {
@@ -35,9 +34,8 @@ public class Jump : MonoBehaviour {
             case jumpState.none:
                 if (Input.GetKeyDown(KeyCode.Space) && canJump)
                 {
-                    //_rigidbody.AddForce(Vector3.up * jumpMultiplier * Time.deltaTime, ForceMode.Force);
-
-                    _rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier*20 * Time.deltaTime;
+                    //_rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier * 20 * Time.deltaTime);
+                    _rigidbody.velocity += new Vector3(0, 1) * (jumpMultiplier*10) * Time.deltaTime;
                 }
                 break;
             case jumpState.rising:
@@ -47,7 +45,6 @@ public class Jump : MonoBehaviour {
                     _rigidbody.velocity += new Vector3(0,1) * jumpMultiplier/2 * Time.deltaTime;
                 }else if (Input.GetKey(KeyCode.Space))
                 {
-                    Debug.Log("pressing");
                     _rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier * Time.deltaTime;
                 }
                 break;
