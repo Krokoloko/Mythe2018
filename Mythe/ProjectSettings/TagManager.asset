@@ -3,19 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - MoveAble
-  - ButtonCompatible
-<<<<<<< HEAD
-  - throwObject
-  - Enemy
-=======
-  - ThrowObject
-<<<<<<< HEAD
-  - Enemy
-=======
->>>>>>> 633b3bbafdf08f08b46d9267e68df22dfcfef6d2
->>>>>>> b65c99f53ee922e1f32e6797cdbea8b9991aba9b
+  tags: []
   layers:
   - Default
   - TransparentFX
