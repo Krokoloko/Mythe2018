@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MoveAble
   - ButtonCompatible
+  - throwObject
+  - Enemy
   layers:
   - Default
   - TransparentFX

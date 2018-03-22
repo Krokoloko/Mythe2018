@@ -14,7 +14,6 @@ public class CameraMovement : MonoBehaviour
         offset = transform.position - target.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = target.transform.position + offset;

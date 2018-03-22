@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 1197801381}
   - component: {fileID: 1197801385}
   - component: {fileID: 1197801379}
+  - component: {fileID: 1197801386}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -502,6 +503,17 @@ MonoBehaviour:
   maxFallSpeed: 8
   landingLag: 0.5
   canJump: 1
+--- !u!114 &1197801386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197801378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ecf25b21f8a2a4284fc58cc862c273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1236335343
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,8 +641,8 @@ GameObject:
   - component: {fileID: 1640664154}
   - component: {fileID: 1640664153}
   - component: {fileID: 1640664152}
-  - component: {fileID: 1640664156}
   - component: {fileID: 1640664157}
+  - component: {fileID: 1640664156}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -846,7 +858,7 @@ GameObject:
   - component: {fileID: 1778037794}
   m_Layer: 0
   m_Name: obstakel2
-  m_TagString: throwObject
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
