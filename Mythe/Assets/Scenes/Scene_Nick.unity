@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1197801386}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ecf25b21f8a2a4284fc58cc862c273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawn: {fileID: 0}
 --- !u!1 &1236335343
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +755,7 @@ GameObject:
   - component: {fileID: 1651092404}
   - component: {fileID: 1651092406}
   - component: {fileID: 1651092407}
+  - component: {fileID: 1651092408}
   m_Layer: 0
   m_Name: New Sprite (1)
   m_TagString: throwObject
@@ -845,6 +847,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!114 &1651092408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1651092403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81aac20e97aa6044b34d0f50239c19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1778037793
 GameObject:
   m_ObjectHideFlags: 0
