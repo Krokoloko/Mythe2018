@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSpawn : MonoBehaviour {
     private bool dead = false;
+    public GameObject _spawn;
 
     void OnCollisionEnter(Collision other)
     {

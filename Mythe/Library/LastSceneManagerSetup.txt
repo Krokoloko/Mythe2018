@@ -1,33 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Scene_Nick.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Scene_Volken.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Scene_Daan.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Scene_Nick.unity
-=======
-- path: Assets/Scenes/Scene_Volken.unity
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Scene_Volken.unity
-=======
-- path: Assets/Scenes/Scene_Nick.unity
->>>>>>> 832b0690d35b1cd39600071c967445cac15bc996
->>>>>>> 56420b0ada8a4f114d227760286b494fe5aba4b7
->>>>>>> a1b2b0883f339e32331cfbfe91071221bc7bd05e
->>>>>>> fbd503b2ac6f54788ac6700ce0548927671472f7
->>>>>>> 0408f43833f218c9b89af2603905bdfae2b37603
->>>>>>> f8eb88e8f8ca2631f7c15f4f6c83680b69e8c44d
->>>>>>> d53f6dade091d7faf57733e51d35714434cbef88
->>>>>>> 633b3bbafdf08f08b46d9267e68df22dfcfef6d2
   isLoaded: 1
   isActive: 1
