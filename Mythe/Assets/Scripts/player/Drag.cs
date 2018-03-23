@@ -29,7 +29,7 @@ public class Drag : MonoBehaviour
 
     void Update()
     {
-
+        
         if (Dragging)
         {
             print("drag");
@@ -59,6 +59,10 @@ public class Drag : MonoBehaviour
                     target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
                 }
             }
+        }
+        else
+        {
+            Debug.Log("Not dragging");
         }
        
     }
