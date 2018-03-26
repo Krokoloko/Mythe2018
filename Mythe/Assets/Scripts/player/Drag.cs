@@ -29,7 +29,7 @@ public class Drag : MonoBehaviour
 
     void Update()
     {
-
+        
         if (Dragging)
         {
             print("drag");
@@ -39,7 +39,7 @@ public class Drag : MonoBehaviour
             {
                 print("stop");
                 Dragging = false;
-                if (target.tag == "throwObject")
+                if (target.tag == "ThrowObject")
                 {
                     if (transform.position.x > target.transform.position.x)
                     {
@@ -60,12 +60,16 @@ public class Drag : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            Debug.Log("Not dragging");
+        }
        
     }
 
     void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "throwObject")
+        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
         {
             Debug.Log("im touching");
             if (Input.GetKeyDown(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftShift))

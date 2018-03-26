@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: 669964250ed9e4b4fa8dac2443beb403
+  - enabled: 1
+    path: Assets/Scenes/Scene_Volken.unity
+    guid: ab3280bcc0acdd34892f3384418f5413
