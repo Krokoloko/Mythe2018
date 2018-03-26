@@ -34,18 +34,21 @@ public class Jump : MonoBehaviour {
             case jumpState.none:
                 if (Input.GetKeyDown(KeyCode.Space) && canJump)
                 {
-                    //_rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier * 20 * Time.deltaTime);
-                    _rigidbody.velocity += new Vector3(0, 1) * (jumpMultiplier*10) * Time.deltaTime;
+                    //_rigidbody.MovePosition(_rigidbody.position += (Vector3.up*jumpMultiplier*Time.deltaTime));
+                    _rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier*1.5f * Time.deltaTime,ForceMode.Impulse);
+                    //_rigidbody.velocity += new Vector3(0, 1) * (jumpMultiplier*15) * Time.deltaTime;
                 }
                 break;
             case jumpState.rising:
                 
                 if (_rigidbody.velocity.y >= maxJumpSpeed)
                 {
-                    _rigidbody.velocity += new Vector3(0,1) * jumpMultiplier/2 * Time.deltaTime;
+                    _rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier / 3 * Time.deltaTime, ForceMode.VelocityChange);
+                    //_rigidbody.velocity += new Vector3(0,1) * jumpMultiplier/2 * Time.deltaTime;
                 }else if (Input.GetKey(KeyCode.Space))
                 {
-                    _rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier * Time.deltaTime;
+                    _rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier * Time.deltaTime, ForceMode.VelocityChange);
+                    //_rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier * Time.deltaTime;
                 }
                 break;
             case jumpState.falling:

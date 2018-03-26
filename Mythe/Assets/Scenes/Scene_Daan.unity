@@ -320,6 +320,8 @@ MonoBehaviour:
   location:
   - {fileID: 0}
   - {fileID: 0}
+  left: 1
+  viewDistance: 5
 --- !u!65 &345883223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -398,7 +400,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 345883221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.73, y: 3.82, z: 0.083}
+  m_LocalPosition: {x: 5.23, y: 4.74, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -589,7 +591,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159605239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 4.17, z: 0.083}
+  m_LocalPosition: {x: -2.6, y: 4.17, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -608,8 +610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHeight: 1.5
-  jumpMultiplier: 15
-  maxJumpSpeed: 2
+  jumpMultiplier: 25
+  maxJumpSpeed: 20
   maxFallSpeed: 1
   landingLag: 0.5
   canJump: 1
