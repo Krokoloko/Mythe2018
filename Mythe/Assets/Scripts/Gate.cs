@@ -5,13 +5,24 @@ using UnityEngine;
 public class Gate : MonoBehaviour {
 
     public GameObject button;
-    private Button _button;
-    private Transform _origin;
-    private float _limit;
     public enum Direction {up, down, left, right};
     public Direction direction;
     public float distance = 3;
+
     private Vector3 _startPosition;
+    private Button _button;
+    private Transform _origin;
+    private float _limit;
+
+    // Use this for initialization
+    void Start()
+    {
+        //_origin = transform;
+        //_limit = transform.position.y;
+        //origin.position.y - distance;
+        _button = button.GetComponent<Button>();
+        _startPosition = transform.position;
+    }
 
     private void OnButton()
     {
@@ -79,14 +90,7 @@ public class Gate : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
-        //_origin = transform;
-        //_limit = transform.position.y;
-            //origin.position.y - distance;
-        _button = button.GetComponent<Button>();
-        _startPosition = transform.position;
-    }
+
 	
 	// Update is called once per frame
 	void Update () {
