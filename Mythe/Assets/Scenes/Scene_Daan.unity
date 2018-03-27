@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 689944334}
   - component: {fileID: 689944333}
   - component: {fileID: 689944332}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689944331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.063, y: 2.33, z: 0}
+  m_LocalPosition: {x: 0.063, y: 0.95, z: 0.03}
   m_LocalScale: {x: 15.109899, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 1159605244}
   - component: {fileID: 1159605245}
   - component: {fileID: 1159605246}
+  - component: {fileID: 1159605247}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -591,7 +592,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159605239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6, y: 4.17, z: 0.083}
+  m_LocalPosition: {x: -2.6, y: -0.32, z: 0.083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -643,6 +644,18 @@ MonoBehaviour:
   crawlMultiplier: 0.5
   collisionMultiplier: 0.5
   crawlSpeedMultiplier: 0.3
+--- !u!114 &1159605247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159605239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49634f5ffdd67e4283e3d621da3981e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpThroughPlatfroms: 1
 --- !u!1 &1167127088
 GameObject:
   m_ObjectHideFlags: 0

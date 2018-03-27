@@ -41,7 +41,6 @@ public class EnemyWalker : Enemy {
                 {
                     if (_hitIdl.collider.gameObject.tag == "Player" && _hitIdl.distance < viewDistance)
                     {
-//                        Debug.Log("Alarm");
                         base.rb.AddForce(Vector3.up * 2,ForceMode.VelocityChange);
                         base.State = enemyState.moving;
                     }
@@ -55,8 +54,6 @@ public class EnemyWalker : Enemy {
                     if (_grounded)
                     {
                         Debug.Log("test");
-//                        if (_hitMov.distance > viewDistance) Debug.Log("overdistance on moving state");
-//                        if (_hitMov.collider.gameObject.tag != "Player") Debug.Log("can't see player.");
                         if (_hitMov.collider.gameObject.tag != "Player" || _hitMov.distance > viewDistance)
                         {
                             Debug.Log("test succesfull");

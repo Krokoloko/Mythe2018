@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Scene_Daan.unity
-=======
-- path: Assets/Scenes/Scene_Volken.unity
->>>>>>> 8d88c18c92b6dda448a81ff423d968dc3f7ad4d3
   isLoaded: 1
   isActive: 1
