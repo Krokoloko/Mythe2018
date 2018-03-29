@@ -7,17 +7,12 @@ public class Jump : MonoBehaviour {
     public enum jumpState {none, falling, rising, midair, landing};
     public jumpState state = jumpState.none;
 
-    public float maxHeight;
-    public float jumpMultiplier;
-    public float maxJumpSpeed;
-    public float maxFallSpeed;
+    public float maxHeight, jumpMultiplier, maxJumpSpeed, maxFallSpeed;
     public float landingLag = 0.5f;
     public bool canJump = true;
 
     private Rigidbody _rigidbody;
-    private float _originalHeight;
-    private float _landTime;
-    private float _jumpHold;
+    private float _originalHeight,_landTime, _jumpHold;
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
 	}
@@ -27,6 +22,7 @@ public class Jump : MonoBehaviour {
         JumpRoutine();
         RoutineSwitch();
     }
+
     private void JumpRoutine()
     {
         switch (state)
@@ -34,18 +30,21 @@ public class Jump : MonoBehaviour {
             case jumpState.none:
                 if (Input.GetKeyDown(KeyCode.Space) && canJump)
                 {
-                    //_rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier * 20 * Time.deltaTime);
-                    _rigidbody.velocity += new Vector3(0, 1) * (jumpMultiplier*10) * Time.deltaTime;
+                    //_rigidbody.MovePosition(_rigidbody.position += (Vector3.up*jumpMultiplier*Time.deltaTime));
+                    _rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier*1.5f * Time.deltaTime,ForceMode.Impulse);
+                    //_rigidbody.velocity += new Vector3(0, 1) * (jumpMultiplier*15) * Time.deltaTime;
                 }
                 break;
             case jumpState.rising:
                 
                 if (_rigidbody.velocity.y >= maxJumpSpeed)
                 {
-                    _rigidbody.velocity += new Vector3(0,1) * jumpMultiplier/2 * Time.deltaTime;
+                    _rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier / 3 * Time.deltaTime, ForceMode.VelocityChange);
+                    //_rigidbody.velocity += new Vector3(0,1) * jumpMultiplier/2 * Time.deltaTime;
                 }else if (Input.GetKey(KeyCode.Space))
                 {
-                    _rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier * Time.deltaTime;
+                    _rigidbody.AddForce(new Vector3(0, 1) * jumpMultiplier * Time.deltaTime, ForceMode.VelocityChange);
+                    //_rigidbody.velocity += new Vector3(0, 1) * jumpMultiplier * Time.deltaTime;
                 }
                 break;
             case jumpState.falling:
@@ -58,16 +57,13 @@ public class Jump : MonoBehaviour {
     }
     private void RoutineSwitch()
     {
-        if (_rigidbody.velocity.y < 0)
-        {
-            state = jumpState.falling;
-        }
+        
         switch (state)
         {
             case jumpState.rising:
                 if (Input.GetKeyUp(KeyCode.Space) || (_originalHeight + maxHeight) <= transform.position.y)
                 {
-                    state = jumpState.falling;
+                    state = jumpState.midair;
                 }
                 break;
             case jumpState.landing:
@@ -75,6 +71,12 @@ public class Jump : MonoBehaviour {
                 {
                     state = jumpState.none;
                     _landTime = 0;
+                }
+                break;
+            case jumpState.midair:
+                if (_rigidbody.velocity.y < 0)
+                {
+                    state = jumpState.falling;
                 }
                 break;
             case jumpState.falling:
@@ -90,6 +92,10 @@ public class Jump : MonoBehaviour {
                     _originalHeight = transform.position.y;
                     state = jumpState.rising;
                 }
+                if (_rigidbody.velocity.y < 0)
+                {
+                    state = jumpState.falling;
+                }
                 break;
         }
     }
@@ -102,9 +108,12 @@ public class Jump : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.distance <= (GetComponent<SpriteRenderer>().sprite.rect.height / 2))
+            if (hit.distance <= (GetComponent<SpriteRenderer>().sprite.rect.height/2))
             {
-                return true;
+                //if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 9)
+                //{
+                    return true;
+                //}
             }
         }
         return false;
