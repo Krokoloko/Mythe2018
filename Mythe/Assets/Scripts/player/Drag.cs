@@ -6,7 +6,7 @@ public class Drag : MonoBehaviour
 {
 
     //  var hit : RaycastHit
-    public float pushforce;
+    public float pushforce = 1;
     public float pullforce = 1;
     private GameObject player;
     private Walk _playerWalk;
@@ -14,6 +14,7 @@ public class Drag : MonoBehaviour
     private float _normSpeed;
     private bool Dragging = false;
     private GameObject target;
+    private MeshRenderer _mesh;
     Vector3 targetposition;
     float diffX;
     [SerializeField]
@@ -29,13 +30,15 @@ public class Drag : MonoBehaviour
 
     void Update()
     {
-        
         if (Dragging)
         {
+            float test = (target.transform.position + (_mesh.bounds.size / 2) - gameObject.transform.position).sqrMagnitude;
+            Debug.Log("range condition " +  test + " radius condition " + _mesh.bounds.size.x*_mesh.bounds.size.x);
+
             print("drag");
             targetposition = new Vector3(transform.position.x + diffX, target.transform.position.y, transform.position.z);
             target.GetComponent<Rigidbody>().MovePosition(targetposition);
-            if (Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.LeftShift) || (target.tag == "MoveAble" && (target.transform.position - gameObject.transform.position).sqrMagnitude > _mesh.bounds.size.x * _mesh.bounds.size.x))
             {
                 print("stop");
                 Dragging = false;
@@ -76,9 +79,10 @@ public class Drag : MonoBehaviour
             {
                 Dragging = true;
                 target = other.gameObject;
+                _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                //_playerWalk.moveSpeed *= (pushforce / 2);
+                _playerWalk.moveSpeed = pushforce;
 
             }
         }
