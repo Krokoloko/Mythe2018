@@ -42,6 +42,8 @@ public class Drag : MonoBehaviour
             {
                 print("stop");
                 Dragging = false;
+
+
                 if (target.tag == "ThrowObject")
                 {
                     if (transform.position.x > target.transform.position.x)
@@ -74,16 +76,35 @@ public class Drag : MonoBehaviour
     {
         if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
         {
+            target = other.gameObject;
             Debug.Log("im touching");
-            if (Input.GetKeyDown(KeyCode.RightShift)||Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Dragging = true;
+<<<<<<< HEAD
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
+=======
+                diffX = target.transform.position.x + 0.08f - transform.position.x;
+                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                //_playerWalk.moveSpeed *= (pushforce / 2);
+            }
+        }
+    }
+>>>>>>> f229eed1db2f1e148cca374cff175eb6b1ed5c87
 
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
+        {
+            target = other.gameObject;
+
+            if (target.transform.position.x + 0.08f - transform.position.x)
+            {
+                Dragging = false;
             }
         }
     }
