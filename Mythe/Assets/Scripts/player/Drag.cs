@@ -5,7 +5,6 @@ using UnityEngine;
 public class Drag : MonoBehaviour
 {
 
-    //  var hit : RaycastHit
     public float pushforce = 1;
     public float pullforce = 1;
     private GameObject player;
@@ -33,7 +32,7 @@ public class Drag : MonoBehaviour
         if (Dragging)
         {
             float test = (target.transform.position + (_mesh.bounds.size / 2) - gameObject.transform.position).sqrMagnitude;
-            Debug.Log("range condition " +  test + " radius condition " + _mesh.bounds.size.x*_mesh.bounds.size.x);
+            Debug.Log("range condition " + test + " radius condition " + _mesh.bounds.size.x * _mesh.bounds.size.x);
 
             print("drag");
             targetposition = new Vector3(transform.position.x + diffX, target.transform.position.y, transform.position.z);
@@ -42,8 +41,6 @@ public class Drag : MonoBehaviour
             {
                 print("stop");
                 Dragging = false;
-
-
                 if (target.tag == "ThrowObject")
                 {
                     if (transform.position.x > target.transform.position.x)
@@ -56,7 +53,7 @@ public class Drag : MonoBehaviour
                         Debug.Log("Player is colliding on target's left side");
                         target.GetComponent<Rigidbody>().AddForce(new Vector3(0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
                     }
-                    
+
                 }
                 else
                 {
@@ -69,42 +66,22 @@ public class Drag : MonoBehaviour
         {
             Debug.Log("Not dragging");
         }
-       
     }
 
     void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
         {
-            target = other.gameObject;
             Debug.Log("im touching");
             if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Dragging = true;
-<<<<<<< HEAD
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
-=======
-                diffX = target.transform.position.x + 0.08f - transform.position.x;
-                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                //_playerWalk.moveSpeed *= (pushforce / 2);
-            }
-        }
-    }
->>>>>>> f229eed1db2f1e148cca374cff175eb6b1ed5c87
 
-    void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
-        {
-            target = other.gameObject;
-
-            if (target.transform.position.x + 0.08f - transform.position.x)
-            {
-                Dragging = false;
             }
         }
     }
