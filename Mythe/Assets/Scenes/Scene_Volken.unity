@@ -1222,9 +1222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9576ec68ca222af43a9c3d8aa24c1b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1292562719}
+  button: {fileID: 0}
   direction: 0
-  distance: 6
+  distance: 3
 --- !u!1 &740653057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,8 +1759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  button: {fileID: 1292562719}
-  direction: 1
+  button: {fileID: 0}
+  direction: 0
   distance: 0.5
 --- !u!23 &1056336148
 MeshRenderer:
@@ -1985,10 +1985,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  maxHeight: 2
-  jumpMultiplier: 15
-  maxJumpSpeed: 2
-  maxFallSpeed: 1
+  maxHeight: 9
+  jumpMultiplier: 10
+  maxJumpSpeed: 8
+  maxFallSpeed: 2
   landingLag: 0.5
   canJump: 1
 --- !u!114 &1142433147
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  moveSpeed: 2
+  moveSpeed: 4
 --- !u!54 &1142433148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2047,7 +2047,7 @@ MonoBehaviour:
   state: 0
   crawlMultiplier: 0.5
   collisionMultiplier: 0.5
-  crawlSpeedMultiplier: 0.3
+  crawlSpeedMultiplier: 0.5
 --- !u!1 &1261761095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,8 +2162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9576ec68ca222af43a9c3d8aa24c1b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1056336146}
-  direction: 1
+  button: {fileID: 0}
+  direction: 0
   distance: 3
 --- !u!23 &1281944483
 MeshRenderer:
@@ -2328,8 +2328,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  button: {fileID: 1292562719}
-  direction: 1
+  button: {fileID: 0}
+  direction: 0
   distance: 0.5
 --- !u!1 &1371996484
 GameObject:
@@ -2688,8 +2688,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer:
     serializedVersion: 2
-    m_Bits: 16
-  forceAmount: 1
+    m_Bits: 0
+  forceAmount: 0
 --- !u!23 &1509527422
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2871,16 +2871,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc739bf045333d4c845b75bfd898b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
+  health: 0
   rb: {fileID: 0}
   spriteRend: {fileID: 0}
   collision: {fileID: 0}
   animator: {fileID: 0}
   State: 0
-  walkSpeed: 1
+  walkSpeed: 0
   location:
   - {fileID: 0}
   - {fileID: 0}
+  left: 0
+  viewDistance: 0
 --- !u!54 &1575913594
 Rigidbody:
   m_ObjectHideFlags: 0

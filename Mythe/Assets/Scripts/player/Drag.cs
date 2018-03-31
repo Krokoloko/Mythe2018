@@ -81,20 +81,20 @@ public class Drag : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Dragging = true;
-<<<<<<< HEAD
+//<<<<<<< HEAD
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
-=======
+//=======
                 diffX = target.transform.position.x + 0.08f - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 //_playerWalk.moveSpeed *= (pushforce / 2);
             }
         }
     }
->>>>>>> f229eed1db2f1e148cca374cff175eb6b1ed5c87
+//>>>>>>> f229eed1db2f1e148cca374cff175eb6b1ed5c87
 
     void OnCollisionExit(Collision other)
     {
@@ -102,7 +102,7 @@ public class Drag : MonoBehaviour
         {
             target = other.gameObject;
 
-            if (target.transform.position.x + 0.08f - transform.position.x)
+      //      if (target.transform.position.x + 0.08f - transform.position.x)
             {
                 Dragging = false;
             }
