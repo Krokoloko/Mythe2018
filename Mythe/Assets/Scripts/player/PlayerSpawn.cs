@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSpawn : MonoBehaviour {
     private bool dead = false;
-    public GameObject _spawn;
-
+    public GameObject player;
+    public Transform SpawnPoint;
+     void Start()
+    {
+        player.transform.position = SpawnPoint.transform.position;
+    }
+    
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Enemy")
@@ -16,7 +21,8 @@ public class PlayerSpawn : MonoBehaviour {
         }
         if (dead)
         {
-            Application.LoadLevel(Application.loadedLevel);
+            //Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(1);
         }
     }
 }
