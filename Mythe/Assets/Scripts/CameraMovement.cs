@@ -7,10 +7,12 @@ public class CameraMovement : MonoBehaviour
     public Transform target;
     public Transform leftBound;
     public Transform rightBound;
+    public Transform player;
     [SerializeField]
     private Vector3 offset;
      void Start()
     {
+        transform.position = new Vector3 (player.transform.position.x,player.transform.position.y, player.transform.position.z - 10);
         offset = transform.position - target.transform.position;
     }
 
