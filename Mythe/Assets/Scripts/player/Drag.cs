@@ -5,6 +5,7 @@ using UnityEngine;
 public class Drag : MonoBehaviour
 {
 
+    //  var hit : RaycastHit
     public float pushforce = 1;
     public float pullforce = 1;
     private GameObject player;
@@ -66,6 +67,7 @@ public class Drag : MonoBehaviour
         {
             Debug.Log("Not dragging");
         }
+
     }
 
     void OnCollisionStay(Collision other)
@@ -76,15 +78,19 @@ public class Drag : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 Dragging = true;
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //<<<<<<< HEAD
 //=======
 //>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
+=======
+>>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //=======
                 diffX = target.transform.position.x + 0.08f - transform.position.x;
@@ -107,8 +113,10 @@ public class Drag : MonoBehaviour
 //=======
 
 //>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
+=======
+
+>>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
             }
         }
     }
 }
-
