@@ -11,11 +11,15 @@ public class Bouncer : MonoBehaviour
 	void Start () {
         overlapBoxPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 	}
-	
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
-            ApplyBounce();
+        {
+            Debug.Log("dave is erg gay");
+        
+        ApplyBounce();
+        }
     }
 	void ApplyBounce()
     {

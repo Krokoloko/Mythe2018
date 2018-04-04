@@ -9,7 +9,7 @@ public class Button : MonoBehaviour {
   //  public Direction direction;
 
 
-void OnCollisionStay(Collision col)
+void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "MoveAble" || col.gameObject.tag == "ThrowObject" || col.gameObject.tag == "Enemy")
         {
@@ -18,7 +18,7 @@ void OnCollisionStay(Collision col)
 
         }
     }
-void OnCollisionExit()
+void OnTriggerExit()
     {
         active = false;
     }

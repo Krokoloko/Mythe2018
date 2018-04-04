@@ -91,6 +91,8 @@ public class Drag : MonoBehaviour
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //<<<<<<< HEAD
 //=======
@@ -98,11 +100,14 @@ public class Drag : MonoBehaviour
 =======
 >>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
 >>>>>>> b4b427e65f5d737c764fc6a90202377820884be4
+>>>>>>> 6ec16ef7c00377e2640dc24cf16c67e1562fe55f
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
                 if (other.gameObject.tag == "throwObject")
                 {
@@ -137,8 +142,8 @@ public class Drag : MonoBehaviour
 
 //>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
 =======
+>>>>>>> 6ec16ef7c00377e2640dc24cf16c67e1562fe55f
 
->>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
             }
         }
     }
