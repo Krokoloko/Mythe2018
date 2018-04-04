@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 offset;
      void Start()
     {
-        transform.position = new Vector3 (player.transform.position.x,player.transform.position.y, player.transform.position.z - 10);
+        transform.position = new Vector3 (player.transform.position.x,player.transform.position.y +2, player.transform.position.z - 10);
         offset = transform.position - target.transform.position;
     }
 

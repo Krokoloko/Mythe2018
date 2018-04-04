@@ -88,11 +88,22 @@ public class Drag : MonoBehaviour
             {
 
                 Dragging = true;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
+//=======
+//>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
+=======
+>>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
+>>>>>>> b4b427e65f5d737c764fc6a90202377820884be4
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
+<<<<<<< HEAD
                 if (other.gameObject.tag == "throwObject")
                 {
                     target.GetComponent<Rigidbody>().useGravity = false;
@@ -101,3 +112,35 @@ public class Drag : MonoBehaviour
         }
     }
 }
+=======
+<<<<<<< HEAD
+//<<<<<<< HEAD
+//=======
+                diffX = target.transform.position.x + 0.08f - transform.position.x;
+                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                //_playerWalk.moveSpeed *= (pushforce / 2);
+            }
+        }
+    }
+//>>>>>>> f229eed1db2f1e148cca374cff175eb6b1ed5c87
+
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
+        {
+            target = other.gameObject;
+
+      //      if (target.transform.position.x + 0.08f - transform.position.x)
+            {
+                Dragging = false;
+//=======
+
+//>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
+=======
+
+>>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
+            }
+        }
+    }
+}
+>>>>>>> b4b427e65f5d737c764fc6a90202377820884be4
