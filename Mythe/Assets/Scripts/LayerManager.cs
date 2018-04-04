@@ -40,7 +40,10 @@ public class LayerManager : MonoBehaviour {
                     case Jump.jumpState.rising:
                         gameObject.layer = 8;
                         break;
-                    case Jump.jumpState.falling:
+                    /*case Jump.jumpState.falling:
+                        gameObject.layer = 8;
+                        break;*/
+                    case Jump.jumpState.landing:
                         gameObject.layer = 0;
                         break;
                     case Jump.jumpState.none:
