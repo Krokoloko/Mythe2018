@@ -21,6 +21,7 @@ public class Drag : MonoBehaviour
     private float throwforce = 5;
 
 
+
     void Start()
     {
         _playerWalk = GetComponent<Walk>();
@@ -32,18 +33,26 @@ public class Drag : MonoBehaviour
     {
         if (Dragging)
         {
-            float test = (target.transform.position + (_mesh.bounds.size / 2) - gameObject.transform.position).sqrMagnitude;
-            Debug.Log("range condition " + test + " radius condition " + _mesh.bounds.size.x * _mesh.bounds.size.x);
+            //float test = (target.transform.position + (_mesh.bounds.size / 2) - gameObject.transform.position).sqrMagnitude;
+            //Debug.Log("range condition " + test + " radius condition " + _mesh.bounds.size.x * _mesh.bounds.size.x);
 
             print("drag");
-            targetposition = new Vector3(transform.position.x + diffX, target.transform.position.y, transform.position.z);
+            if (target.tag == "throwObject")
+            {
+                targetposition = new Vector3(transform.position.x + diffX, transform.position.y, transform.position.z);
+            }
+            else if (target.tag == "MoveAble")
+            {
+                targetposition = new Vector3(transform.position.x + diffX, target.transform.position.y, transform.position.z);
+            }
+            
             target.GetComponent<Rigidbody>().MovePosition(targetposition);
-            if (Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.LeftShift) || (target.tag == "MoveAble" && (target.transform.position - gameObject.transform.position).sqrMagnitude > _mesh.bounds.size.x * _mesh.bounds.size.x))
             {
                 print("stop");
                 Dragging = false;
-                if (target.tag == "ThrowObject")
+                if (target.tag == "throwObject")
                 {
+                    target.GetComponent<Rigidbody>().useGravity = true;
                     if (transform.position.x > target.transform.position.x)
                     {
                         Debug.Log("Player is colliding on target's right side");
@@ -72,19 +81,66 @@ public class Drag : MonoBehaviour
 
     void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
+        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "throwObject")
         {
             Debug.Log("im touching");
             if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
             {
+
                 Dragging = true;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
+//=======
+//>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
+=======
+>>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
+>>>>>>> b4b427e65f5d737c764fc6a90202377820884be4
                 target = other.gameObject;
                 _mesh = target.GetComponent<MeshRenderer>();
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
-
+<<<<<<< HEAD
+                if (other.gameObject.tag == "throwObject")
+                {
+                    target.GetComponent<Rigidbody>().useGravity = false;
+                }
             }
         }
     }
 }
+=======
+<<<<<<< HEAD
+//<<<<<<< HEAD
+//=======
+                diffX = target.transform.position.x + 0.08f - transform.position.x;
+                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                //_playerWalk.moveSpeed *= (pushforce / 2);
+            }
+        }
+    }
+//>>>>>>> f229eed1db2f1e148cca374cff175eb6b1ed5c87
+
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
+        {
+            target = other.gameObject;
+
+      //      if (target.transform.position.x + 0.08f - transform.position.x)
+            {
+                Dragging = false;
+//=======
+
+//>>>>>>> dbabfc2bbd0b0e56bf0a34741f816c936fc7b644
+=======
+
+>>>>>>> 2f077e177df42f9cf3f544e6b882da8fbc1cbd8b
+            }
+        }
+    }
+}
+>>>>>>> b4b427e65f5d737c764fc6a90202377820884be4
