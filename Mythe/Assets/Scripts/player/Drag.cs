@@ -37,7 +37,7 @@ public class Drag : MonoBehaviour
             //Debug.Log("range condition " + test + " radius condition " + _mesh.bounds.size.x * _mesh.bounds.size.x);
 
             print("drag");
-            if (target.tag == "throwObject")
+            if (target.tag == "ThrowObject")
             {
                 targetposition = new Vector3(transform.position.x + diffX, transform.position.y, transform.position.z);
             }
@@ -47,10 +47,11 @@ public class Drag : MonoBehaviour
             }
 
             target.GetComponent<Rigidbody>().MovePosition(targetposition);
+            if(Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.LeftShift) || (target.tag == "MoveAble" && (target.transform.position - gameObject.transform.position).sqrMagnitude > _mesh.bounds.size.x * _mesh.bounds.size.x))
             {
                 print("stop");
                 Dragging = false;
-                if (target.tag == "throwObject")
+                if (target.tag == "ThrowObject")
                 {
                     target.GetComponent<Rigidbody>().useGravity = true;
                     if (transform.position.x > target.transform.position.x)
@@ -81,7 +82,7 @@ public class Drag : MonoBehaviour
 
     void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "throwObject")
+        if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
         {
             Debug.Log("im touching");
             if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
@@ -93,7 +94,7 @@ public class Drag : MonoBehaviour
                 diffX = target.transform.position.x - transform.position.x;
                 target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 _playerWalk.moveSpeed = pushforce;
-                if (other.gameObject.tag == "throwObject")
+                if (other.gameObject.tag == "ThrowObject")
                 {
                     target.GetComponent<Rigidbody>().useGravity = false;
                 }

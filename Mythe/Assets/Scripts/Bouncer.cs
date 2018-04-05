@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Bouncer : MonoBehaviour
 {
+    public GameObject button;
     public LayerMask layer;
     public float forceAmount;
     private Vector3 overlapBoxPosition;
+    private Button _button;
 
-	void Start () {
+    void Start () {
+        _button = button.GetComponent<Button>();
         overlapBoxPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 	}
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (_button.active)
         {
             Debug.Log("dave is erg gay");
         
