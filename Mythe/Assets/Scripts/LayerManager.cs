@@ -40,13 +40,31 @@ public class LayerManager : MonoBehaviour {
                     case Jump.jumpState.rising:
                         gameObject.layer = 8;
                         break;
-                    /*case Jump.jumpState.falling:
-                        gameObject.layer = 8;
-                        break;*/
                     case Jump.jumpState.landing:
                         gameObject.layer = 0;
                         break;
+                    case Jump.jumpState.falling:
+                        gameObject.layer = 8;
+                        break;
                     case Jump.jumpState.none:
+                        gameObject.layer = 0;
+                        break;
+                }
+                switch (gameObject.GetComponent<Climb>().state)
+                {
+                    case Climb.ClimbState.climbingDown:
+                        gameObject.layer = 8;
+                        break;
+
+                    case Climb.ClimbState.climbingNeutral:
+                        gameObject.layer = 8;
+                        break;
+
+                    case Climb.ClimbState.climbingUp:
+                        gameObject.layer = 8;
+                        break;
+
+                    case Climb.ClimbState.none:
                         gameObject.layer = 0;
                         break;
                 }
