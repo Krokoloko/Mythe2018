@@ -92,7 +92,7 @@ public class Jump : MonoBehaviour {
                     _originalHeight = transform.position.y;
                     state = jumpState.rising;
                 }
-                if (_rigidbody.velocity.y < 0)
+                if (_rigidbody.velocity.y < -0.01)
                 {
                     state = jumpState.falling;
                 }
