@@ -33,20 +33,33 @@ public class EnemyWalker : Enemy {
     }
     void RoutineSwitch()
     {
+        if (base.AirState == EnemyAirState.falling && IsGrounded())
+        {
+            base.AirState = EnemyAirState.landing;
+        }
+        if (base.rb.velocity.y <= 0.01f)
+        {
+            AirState = EnemyAirState.falling;
+        }
+        if (base.rb.velocity.y >= 0.01f)
+        {
+            AirState = EnemyAirState.midair;
+        }
+
         switch (base.State)
         {
-            case enemyState.idle:
+            case EnemyState.idle:
                 RaycastHit _hitIdl;
                 if (Physics.Raycast(_scoutRay, out _hitIdl))
                 {
                     if (_hitIdl.collider.gameObject.tag == "Player" && _hitIdl.distance < viewDistance)
                     {
                         base.rb.AddForce(Vector3.up * 2,ForceMode.VelocityChange);
-                        base.State = enemyState.moving;
+                        base.State = EnemyState.moving;
                     }
                 }
                 break;
-            case enemyState.moving:
+            case EnemyState.moving:
                 RaycastHit _hitMov;
                 if (Physics.Raycast(_scoutRay, out _hitMov))
                 {
@@ -57,17 +70,17 @@ public class EnemyWalker : Enemy {
                         if (_hitMov.collider.gameObject.tag != "Player" || _hitMov.distance > viewDistance)
                         {
                             Debug.Log("test succesfull");
-                            base.State = enemyState.idle;
+                            base.State = EnemyState.idle;
                         }
                     }
                 }
                 else
                 {
-                    base.State = enemyState.idle;
+                    base.State = EnemyState.idle;
                 }
                 break;
-            case enemyState.none:
-                State = enemyState.idle;
+            case EnemyState.none:
+                State = EnemyState.idle;
                 break;
         }
     }
@@ -76,8 +89,8 @@ public class EnemyWalker : Enemy {
     {
         switch (base.State)
         {
-            case enemyState.moving:
-                if (_grounded)
+            case EnemyState.moving:
+                if (IsGrounded() || _grounded)
                 {
                     base.rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
                     Vector3 direction = new Vector3(_dir, 0, 0);
@@ -85,7 +98,7 @@ public class EnemyWalker : Enemy {
                     base.rb.MovePosition(base.rb.position += velocity);
                 }
                 break;
-            case enemyState.idle:
+            case EnemyState.idle:
                 base.rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
                 break;
         }
@@ -96,18 +109,42 @@ public class EnemyWalker : Enemy {
         if (collision.transform.position.y <= transform.position.y)
         {
             _grounded = true;
+            base.AirState = EnemyAirState.none;
         }
         else
         {
+            base.AirState = EnemyAirState.midair;
             _grounded = false;
         }
     }
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.transform.position.y <= transform.position.y)
         {
+            base.AirState = EnemyAirState.midair;
             _grounded = false;
         }
+    }
+
+    private bool IsGrounded()
+    {
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
+        Debug.DrawRay(ray.origin, ray.direction, Color.black);
+
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.distance <= (GetComponent<SpriteRenderer>().sprite.rect.height / 2))
+            {
+                //if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 9)
+                //{
+                return true;
+                //}
+            }
+        }
+        return false;
     }
     /*
     private bool OnLocation()
