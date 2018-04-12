@@ -74,7 +74,7 @@ public class Jump : MonoBehaviour {
                 }
                 break;
             case jumpState.midair:
-                if (_rigidbody.velocity.y < 0)
+                if (_rigidbody.velocity.y <= 0)
                 {
                     state = jumpState.falling;
                 }

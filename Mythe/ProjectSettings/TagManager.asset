@@ -7,11 +7,15 @@ TagManager:
   - layer1
   - layer2
   - ladder
+<<<<<<< HEAD
+  - enemy
+=======
   - ThrowObject
   - MoveAble
   - Enemy
   - LeftBound
   - RightBound
+>>>>>>> 7c0e4249cbfbe398bb7b822e047df64427c2271f
   layers:
   - Default
   - TransparentFX

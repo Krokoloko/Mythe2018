@@ -50,6 +50,7 @@ public class LayerManager : MonoBehaviour {
                         gameObject.layer = 0;
                         break;
                 }
+
                 switch (gameObject.GetComponent<Climb>().state)
                 {
                     case Climb.ClimbState.climbingDown:
@@ -65,6 +66,27 @@ public class LayerManager : MonoBehaviour {
                         break;
 
                     case Climb.ClimbState.none:
+                        gameObject.layer = 0;
+                        break;
+                }
+            }
+            if (_id == "enemy")
+            {
+                switch (gameObject.GetComponent<EnemyWalker>().AirState)
+                {
+                    case Enemy.EnemyAirState.falling:
+                        gameObject.layer = 8;
+                        break;
+
+                    case Enemy.EnemyAirState.midair:
+                        gameObject.layer = 8;
+                        break;
+
+                    case Enemy.EnemyAirState.none:
+                        gameObject.layer = 0;
+                        break;
+
+                    case Enemy.EnemyAirState.landing:
                         gameObject.layer = 0;
                         break;
                 }

@@ -7,7 +7,7 @@ public class Climb : MonoBehaviour {
 
     public enum ClimbState {none, climbingNeutral, climbingUp, climbingDown};
     public ClimbState state = ClimbState.none;
-    public float climbUpSpeed, climbDownSpeed; 
+    public float climbUpSpeed, climbDownSpeed, horSpeed; 
 
     private GameObject _player;
     private Walk _walk;
@@ -46,7 +46,7 @@ public class Climb : MonoBehaviour {
         {
             case ClimbState.none:
 
-                if (InRange() && Input.GetKey(KeyCode.W))
+                if (InRange() && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) && _jump.state != Jump.jumpState.falling)
                 {
                     state = ClimbState.climbingNeutral;
                     _rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
@@ -99,14 +99,15 @@ public class Climb : MonoBehaviour {
 
             case ClimbState.climbingNeutral:
 
-                if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.W))
-                {
-                    break;
-                }
+                
                 if (!InRange())
                 {
                     state = ClimbState.none;
                     _rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+                }
+                if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.W))
+                {
+                    break;
                 }
                 if (Input.GetKey(KeyCode.W))
                 {
@@ -117,7 +118,8 @@ public class Climb : MonoBehaviour {
                 {
                     _rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
                     state = ClimbState.climbingDown;
-                }               
+                }
+                
                 break;
         }
     }
@@ -174,7 +176,7 @@ public class Climb : MonoBehaviour {
         {
             if (!Input.GetKey(KeyCode.A))
             {
-                _rb.MovePosition(Vector3.right);
+                _rb.MovePosition(Vector3.right * horSpeed);
             }
         }
 
@@ -182,7 +184,7 @@ public class Climb : MonoBehaviour {
         {
             if (!Input.GetKey(KeyCode.D))
             {
-                _rb.MovePosition(Vector3.left);
+                _rb.MovePosition(Vector3.left * horSpeed);
             }
         }
     }

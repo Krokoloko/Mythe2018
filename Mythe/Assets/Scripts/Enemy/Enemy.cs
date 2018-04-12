@@ -5,13 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     public float health;
-    public enum enemyState { none, idle, scouting, moving, attack, dead };
+    public enum EnemyState { none, idle, scouting, moving, attack, dead };
+    public enum EnemyAirState { none, midair, falling, landing };
 
     public Rigidbody rb;
     public SpriteRenderer spriteRend;
     public Collider2D collision;
     public Animator animator;
-    public enemyState State;
+    public EnemyState State;
+    public EnemyAirState AirState;
 
 
     public virtual void Damage()
