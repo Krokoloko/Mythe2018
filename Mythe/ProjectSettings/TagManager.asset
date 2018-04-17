@@ -4,18 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - RightBound
   - ThrowObject
-  - Enemy
-  - MoveAble
-  - LeftBound
-<<<<<<< HEAD
-  - throwObject
-  - ladder
-  - leftEnd
   - rightEnd
-=======
->>>>>>> 67924ca153368199fed78b46704c60133007a44f
+  - LeftBound
+  - leftEnd
+  - MoveAble
+  - Enemy
+  - RightBound
   layers:
   - Default
   - TransparentFX
@@ -37,7 +32,7 @@ TagManager:
   - 
   - 
   - 
-  - goingthrough
+  - 
   - 
   - 
   - 
