@@ -7,9 +7,9 @@ public class LayerManager : MonoBehaviour {
 
     /*------------------Layers------------------
      0 = default: works on every layer.
-     8 = layer1: holds all layers except 'layer1'
-     9 = layer2: holds all layers except 'layer2' (objects such as jumpthroughplatforms are associated with this layer)
-         */
+     8 = layer1: holds no collision with 'layer2' & 'goingthrough'
+     20 = goingThrough: this can go through 'layer1'
+          */
     public bool jumpThroughPlatfroms = false;
 
 
@@ -33,63 +33,76 @@ public class LayerManager : MonoBehaviour {
     {
         if (b)
         {
-            if (_id == "Player")
+            switch (_id)
             {
-                switch (gameObject.GetComponent<Jump>().state)
-                {
-                    case Jump.jumpState.rising:
-                        gameObject.layer = 8;
-                        break;
-                    case Jump.jumpState.landing:
+                case "Player":
+                    Debug.Log("object is player");
+                    if (gameObject.GetComponent<Climb>().state != Climb.ClimbState.none)
+                    {
+                        switch (gameObject.GetComponent<Climb>().state)
+                        {
+                            case Climb.ClimbState.climbingDown:
+                                gameObject.layer = 20;
+                                break;
+
+                            case Climb.ClimbState.climbingNeutral:
+                                gameObject.layer = 20;
+                                break;
+
+                            case Climb.ClimbState.climbingUp:
+                                gameObject.layer = 20;
+                                break;
+                        }
+                    }
+                    else
+                    {
                         gameObject.layer = 0;
-                        break;
-                    case Jump.jumpState.falling:
-                        gameObject.layer = 8;
-                        break;
-                    case Jump.jumpState.none:
-                        gameObject.layer = 0;
-                        break;
-                }
+                    }
+                    switch (gameObject.GetComponent<Jump>().state)
+                    {
+                        case Jump.jumpState.rising:
+                            Debug.Log("layer change from rising");
+                            gameObject.layer = 20;
+                            break;
+                        case Jump.jumpState.midair:
+                            gameObject.layer = 20;
+                            break;
+                        case Jump.jumpState.landing:
+                            Debug.Log("layer change from landing");
+                            gameObject.layer = 0;
+                            break;
+                        case Jump.jumpState.falling:
+                            Debug.Log("layer change from falling");
+                            gameObject.layer = 20;
+                            break;
+                        case Jump.jumpState.none:
+                            Debug.Log("layer change from nothing");
+                            gameObject.layer = 0;
+                            break;
+                    }
 
-                switch (gameObject.GetComponent<Climb>().state)
-                {
-                    case Climb.ClimbState.climbingDown:
-                        gameObject.layer = 8;
-                        break;
+                    
+                    break;
+                 case "enemy":
+                    switch (gameObject.GetComponent<EnemyWalker>().AirState)
+                    {
+                        case Enemy.EnemyAirState.falling:
+                            gameObject.layer = 20;
+                            break;
 
-                    case Climb.ClimbState.climbingNeutral:
-                        gameObject.layer = 8;
-                        break;
+                        case Enemy.EnemyAirState.midair:
+                            gameObject.layer = 20;
+                            break;
 
-                    case Climb.ClimbState.climbingUp:
-                        gameObject.layer = 8;
-                        break;
+                        case Enemy.EnemyAirState.none:
+                            gameObject.layer = 0;
+                            break;
 
-                    case Climb.ClimbState.none:
-                        gameObject.layer = 0;
-                        break;
-                }
-            }
-            if (_id == "enemy")
-            {
-                switch (gameObject.GetComponent<EnemyWalker>().AirState)
-                {
-                    case Enemy.EnemyAirState.falling:
-                        gameObject.layer = 8;
-                        break;
-
-                    case Enemy.EnemyAirState.midair:
-                        gameObject.layer = 8;
-                        break;
-
-                    case Enemy.EnemyAirState.none:
-                        gameObject.layer = 0;
-                        break;
-
-                    case Enemy.EnemyAirState.landing:
-                        gameObject.layer = 0;
-                        break;
-                }
+                        case Enemy.EnemyAirState.landing:
+                            gameObject.layer = 0;
+                            break;
+                    }
+                    break;
             }
         }
     }

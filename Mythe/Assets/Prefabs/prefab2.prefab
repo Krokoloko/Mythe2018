@@ -1168,6 +1168,7 @@ MonoBehaviour:
   collision: {fileID: 0}
   animator: {fileID: 0}
   State: 0
+  AirState: 0
   walkSpeed: 2
   location:
   - {fileID: 0}
