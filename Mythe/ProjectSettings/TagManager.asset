@@ -4,11 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - RightBound
   - ThrowObject
-  - Enemy
-  - MoveAble
+  - rightEnd
   - LeftBound
+  - leftEnd
+  - MoveAble
+  - Enemy
+  - RightBound
   layers:
   - Default
   - TransparentFX

@@ -29,15 +29,17 @@ public class Climb : MonoBehaviour {
         _jump = _player.GetComponent<Jump>();
         _drag = _player.GetComponent<Drag>();
         _crouch = _player.GetComponent<Crouch>();
-        _ladders = GameObject.FindGameObjectsWithTag("ladder");
-
 	}
 
     void Update()
     {
+        _ladders = GameObject.FindGameObjectsWithTag("ladder");
+        if (_ladders.Length == 0)
+        {
+            RoutineSwitch();
+            ClimbRoutine();
+        }
         SwitchScripts();
-        RoutineSwitch();
-        ClimbRoutine();
     }
 
     private void RoutineSwitch()
@@ -135,13 +137,11 @@ public class Climb : MonoBehaviour {
             case ClimbState.climbingDown:
                 _climbing = true;
                 _rb.MovePosition(_rb.transform.position + Vector3.down * climbDownSpeed);
-                //transform.Translate(Vector3.down * climbDownSpeed);
                 break;
 
             case ClimbState.climbingUp:
                 _climbing = true;
                 _rb.MovePosition(_rb.transform.position + Vector3.up * climbUpSpeed);
-                //transform.Translate(Vector3.up * climbUpSpeed);
                 break;
 
             case ClimbState.climbingNeutral:

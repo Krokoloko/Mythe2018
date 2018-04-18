@@ -15,15 +15,16 @@ public class TranslateNextLevel : MonoBehaviour {
 
     public void ReplaceCameraValues()
     {
-        for (int i =0;i < _level.GetComponentsInChildren<GameObject>().Length; i++)
+        int objects = _level.transform.childCount;
+        for (int i =0;i < objects; i++)
         {
-            if (_level.GetComponentsInChildren<GameObject>()[i].tag == "leftBound")
+            if (_level.transform.GetChild(i).tag == "LeftBound")
             {
-                _camera.leftBound = _level.GetComponentsInChildren<GameObject>()[i].transform;
+                _camera.leftBound = _level.transform.GetChild(i).transform;
             }
-            if (_level.GetComponentsInChildren<GameObject>()[i].tag == "rightBound")
+            if (_level.transform.GetChild(i).tag == "RightBound")
             {
-                _camera.rightBound = _level.GetComponentsInChildren<GameObject>()[i].transform;
+                _camera.rightBound = _level.transform.GetChild(i).transform;
             }
         }
     }
