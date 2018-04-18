@@ -79,7 +79,7 @@ public class Drag : MonoBehaviour
         }
 
     }
-
+    /*
     void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "MoveAble" || other.gameObject.tag == "ThrowObject")
@@ -101,4 +101,5 @@ public class Drag : MonoBehaviour
             }
         }
     }
+    */
 }
