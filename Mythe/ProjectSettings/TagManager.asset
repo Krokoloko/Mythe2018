@@ -11,6 +11,7 @@ TagManager:
   - MoveAble
   - Enemy
   - RightBound
+  - leftWall
   layers:
   - Default
   - TransparentFX
