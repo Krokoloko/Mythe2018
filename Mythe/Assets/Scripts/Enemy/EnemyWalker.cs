@@ -28,9 +28,8 @@ public class EnemyWalker : Enemy {
         _dir = left ? -1 : 1;
 
         Vector3 dirRay = new Vector3(_dir, 0, 0);
-        _scoutRay = new Ray(transform.position, dirRay);
-        Debug.Log("EnemyState = " + base.State);
-        Debug.Log("Grounded = " + _grounded);
+        //Debug.Log("EnemyState = " + base.State);
+        //Debug.Log("Grounded = " + _grounded);
         Debug.DrawRay(_scoutRay.origin, _scoutRay.direction, Color.yellow);
         RoutineAction();
         RoutineSwitch();
@@ -73,13 +72,11 @@ public class EnemyWalker : Enemy {
                 RaycastHit _hitMov;
                 if (Physics.Raycast(_scoutRay, out _hitMov))
                 {
-                    Debug.Log("dist = " + _hitMov.distance + "  tag = " + _hitMov.collider.tag);
+                    //Debug.Log("dist = " + _hitMov.distance + "  tag = " + _hitMov.collider.tag);
                     if (_grounded)
                     {
-                        Debug.Log("test");
                         if (_hitMov.collider.gameObject.tag != "Player" || _hitMov.distance > viewDistance)
                         {
-                            Debug.Log("test succesfull");
                             base.State = EnemyState.idle;
                         }
                     }
@@ -159,7 +156,7 @@ public class EnemyWalker : Enemy {
     
     private bool OnDeathLocation()
     {
-        if (transform.position.y > _orgPos.y - deathYPos)
+        if (transform.position.y < _orgPos.y - Mathf.Abs(deathYPos))
         {
             return true;
         }
