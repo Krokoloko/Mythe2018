@@ -8,7 +8,10 @@ public class EnemyWalker : Enemy {
     public GameObject[] location = new GameObject[2];
     public bool left;
     public float viewDistance;
+    public float deathYPos;
+    public bool spooked;
 
+    private Vector3 _orgPos;
     private bool _suprised = false;
     private bool _grounded;
     private float _lagTime, _time, _dir;
@@ -17,6 +20,7 @@ public class EnemyWalker : Enemy {
     void Start()
     {
         base.rb = GetComponent<Rigidbody>();
+        _orgPos = transform.position;
     }
 
     void Update()
@@ -30,6 +34,11 @@ public class EnemyWalker : Enemy {
         Debug.DrawRay(_scoutRay.origin, _scoutRay.direction, Color.yellow);
         RoutineAction();
         RoutineSwitch();
+
+        if (OnDeathLocation())
+        {
+            Destroy(gameObject);
+        }
     }
     void RoutineSwitch()
     {
@@ -56,6 +65,7 @@ public class EnemyWalker : Enemy {
                     {
                         base.rb.AddForce(Vector3.up * 2,ForceMode.VelocityChange);
                         base.State = EnemyState.moving;
+                        spooked = true;
                     }
                 }
                 break;
@@ -146,17 +156,16 @@ public class EnemyWalker : Enemy {
         }
         return false;
     }
-    /*
-    private bool OnLocation()
+    
+    private bool OnDeathLocation()
     {
-        if (transform.position == location[0].transform.position || transform.position == location[1].transform.position)
+        if (transform.position.y > _orgPos.y - deathYPos)
         {
-            _left = !_left;
             return true;
         }
         else
         {
             return false;
         }
-    }*/
+    }
 }
