@@ -8,7 +8,10 @@ public class EnemyWalker : Enemy {
     public GameObject[] location = new GameObject[2];
     public bool left;
     public float viewDistance;
+    public float deathYPos;
+    public bool spooked;
 
+    private Vector3 _orgPos;
     private bool _suprised = false;
     private bool _grounded;
     private float _lagTime, _time, _dir;
@@ -17,6 +20,7 @@ public class EnemyWalker : Enemy {
     void Start()
     {
         base.rb = GetComponent<Rigidbody>();
+        _orgPos = transform.position;
     }
 
     void Update()
@@ -24,12 +28,16 @@ public class EnemyWalker : Enemy {
         _dir = left ? -1 : 1;
 
         Vector3 dirRay = new Vector3(_dir, 0, 0);
-        _scoutRay = new Ray(transform.position, dirRay);
-        Debug.Log("EnemyState = " + base.State);
-        Debug.Log("Grounded = " + _grounded);
+        //Debug.Log("EnemyState = " + base.State);
+        //Debug.Log("Grounded = " + _grounded);
         Debug.DrawRay(_scoutRay.origin, _scoutRay.direction, Color.yellow);
         RoutineAction();
         RoutineSwitch();
+
+        if (OnDeathLocation())
+        {
+            Destroy(gameObject);
+        }
     }
     void RoutineSwitch()
     {
@@ -56,6 +64,7 @@ public class EnemyWalker : Enemy {
                     {
                         base.rb.AddForce(Vector3.up * 2,ForceMode.VelocityChange);
                         base.State = EnemyState.moving;
+                        spooked = true;
                     }
                 }
                 break;
@@ -63,13 +72,11 @@ public class EnemyWalker : Enemy {
                 RaycastHit _hitMov;
                 if (Physics.Raycast(_scoutRay, out _hitMov))
                 {
-                    Debug.Log("dist = " + _hitMov.distance + "  tag = " + _hitMov.collider.tag);
+                    //Debug.Log("dist = " + _hitMov.distance + "  tag = " + _hitMov.collider.tag);
                     if (_grounded)
                     {
-                        Debug.Log("test");
                         if (_hitMov.collider.gameObject.tag != "Player" || _hitMov.distance > viewDistance)
                         {
-                            Debug.Log("test succesfull");
                             base.State = EnemyState.idle;
                         }
                     }
@@ -146,17 +153,16 @@ public class EnemyWalker : Enemy {
         }
         return false;
     }
-    /*
-    private bool OnLocation()
+    
+    private bool OnDeathLocation()
     {
-        if (transform.position == location[0].transform.position || transform.position == location[1].transform.position)
+        if (transform.position.y < _orgPos.y - Mathf.Abs(deathYPos))
         {
-            _left = !_left;
             return true;
         }
         else
         {
             return false;
         }
-    }*/
+    }
 }
