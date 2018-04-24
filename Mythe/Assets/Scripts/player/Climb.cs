@@ -9,11 +9,13 @@ public class Climb : MonoBehaviour {
     public ClimbState state = ClimbState.none;
     public float climbUpSpeed, climbDownSpeed, horSpeed; 
 
+    
     private GameObject _player;
     private Walk _walk;
     private Jump _jump;
     private Drag _drag;
     private Crouch _crouch;
+    private PlayerAnimationController _animator;
     private Rigidbody _rb;
 
     private bool _climbing;
@@ -29,7 +31,8 @@ public class Climb : MonoBehaviour {
         _jump = _player.GetComponent<Jump>();
         _drag = _player.GetComponent<Drag>();
         _crouch = _player.GetComponent<Crouch>();
-	}
+        _animator = _player.GetComponent<PlayerAnimationController>();
+    }
 
     void Update()
     {
@@ -135,16 +138,20 @@ public class Climb : MonoBehaviour {
                 break;
 
             case ClimbState.climbingDown:
+                _animator.AnimatorSwitchTo("climbingDown");
                 _climbing = true;
                 _rb.MovePosition(_rb.transform.position + Vector3.down * climbDownSpeed);
+                
                 break;
 
             case ClimbState.climbingUp:
+                _animator.AnimatorSwitchTo("climbingUp");
                 _climbing = true;
                 _rb.MovePosition(_rb.transform.position + Vector3.up * climbUpSpeed);
                 break;
 
             case ClimbState.climbingNeutral:
+                _animator.AnimatorSwitchTo("climbing");
                 _climbing = true;
                 break;
         }

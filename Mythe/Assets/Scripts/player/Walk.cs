@@ -5,6 +5,7 @@ using UnityEngine;
 public class Walk : MonoBehaviour {
 
     private Rigidbody _rigidbody;
+    private PlayerAnimationController _animator;
     public enum walkState {none, walking};
 
     public walkState state;
@@ -14,6 +15,7 @@ public class Walk : MonoBehaviour {
 
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<PlayerAnimationController>();
 	}
 
     private void Update()
@@ -28,6 +30,7 @@ public class Walk : MonoBehaviour {
             Vector3 direction = new Vector3(xInput, 0, 0);
             Vector3 velocity = direction * moveSpeed * Time.deltaTime;
             _rigidbody.MovePosition(_rigidbody.position + velocity);
+            _animator.AnimatorSwitchTo("walk");
             // transform.Translate(direction * moveSpeed * Time.deltaTime);
             state = walkState.walking;
         }
@@ -44,6 +47,7 @@ public class Walk : MonoBehaviour {
         */
         else
         {
+            _animator.AnimatorSwitchTo("idle");
             state = walkState.none;
         }
 	}

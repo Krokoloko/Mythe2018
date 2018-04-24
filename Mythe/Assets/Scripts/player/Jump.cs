@@ -11,10 +11,12 @@ public class Jump : MonoBehaviour {
     public float landingLag = 0.5f;
     public bool canJump = true;
 
+    private PlayerAnimationController _animator;
     private Rigidbody _rigidbody;
     private float _originalHeight,_landTime, _jumpHold;
     void Start () {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<PlayerAnimationController>();
 	}
 	
 	void Update () {
@@ -63,25 +65,34 @@ public class Jump : MonoBehaviour {
             case jumpState.rising:
                 if (Input.GetKeyUp(KeyCode.Space) || (_originalHeight + maxHeight) <= transform.position.y)
                 {
+                    _animator.AnimatorSwitchTo("climax");
+
                     state = jumpState.midair;
                 }
                 break;
             case jumpState.landing:
                 if (Time.time - _landTime >= landingLag)
                 {
+                    _animator.AnimatorSwitchTo("idle");
+
                     state = jumpState.none;
+
                     _landTime = 0;
                 }
                 break;
             case jumpState.midair:
                 if (_rigidbody.velocity.y <= 0)
                 {
+                    _animator.AnimatorSwitchTo("falling");
+
                     state = jumpState.falling;
                 }
                 break;
             case jumpState.falling:
                 if (IsGrounded())
                 {
+                    _animator.AnimatorSwitchTo("landing");
+
                     state = jumpState.landing;
                     _landTime = Time.time;
                 }
@@ -90,10 +101,14 @@ public class Jump : MonoBehaviour {
                 if (Input.GetKey(KeyCode.Space) && canJump)
                 {
                     _originalHeight = transform.position.y;
+                    _animator.AnimatorSwitchTo("jump");
+
                     state = jumpState.rising;
                 }
                 if (_rigidbody.velocity.y < -0.01)
                 {
+                    _animator.AnimatorSwitchTo("falling");
+
                     state = jumpState.falling;
                 }
                 break;

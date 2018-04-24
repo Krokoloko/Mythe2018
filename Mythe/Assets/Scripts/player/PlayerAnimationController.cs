@@ -6,46 +6,32 @@ public class PlayerAnimationController : MonoBehaviour {
 
     private Animator _animator;
     private AnimatorStateInfo _currentAnimationInfo;
-
-    //scripts from the player
-    private Walk _walk;
-    private Jump _jump;
-    private Crouch _crouch;
-    private Climb _climb;
-    private Drag _drag;
+    private string _currentAnimation;
 
     void Start()
     {
-        _walk = GetComponent<Walk>();
-        _jump = GetComponent<Jump>();
-        _crouch = GetComponent<Crouch>();
-        _climb = GetComponent<Climb>();
-        _drag = GetComponent<Drag>();
-
         _animator = GetComponent<Animator>();
         _currentAnimationInfo = _animator.GetCurrentAnimatorStateInfo(0);
-
+        _currentAnimation = "idle";
+        AnimatorSwitchTo(_currentAnimation);
     }
 
     void Update()
     {
+        Debug.Log("");
         _currentAnimationInfo = _animator.GetCurrentAnimatorStateInfo(0);
     }
 
-    public void AnimatorSwitch(string animation)
+    public void AnimatorSwitchTo(string str)
     {
-        switch (animation)
+        _currentAnimationInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (_currentAnimation != str)
         {
-            case "walk":
-                break;
-            case "jump":
-                break;
-            case "crouch":
-                break;
-            case "climb":
-                break;
-            case "drag":
-                break;
+            _animator.ResetTrigger(_currentAnimation);
+
+            _currentAnimation = str;
+
+            _animator.SetTrigger(str);
         }
     }
 }
