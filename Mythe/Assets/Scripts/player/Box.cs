@@ -13,10 +13,7 @@ public class Box : InteractableObject
 
     protected override bool ReasonInteraction()
     {
-        if (Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.LeftShift))
-            return false;
-
-        return true;
+        return (!Input.GetKeyUp(KeyCode.RightShift) || !Input.GetKeyUp(KeyCode.LeftShift));
     }
 
     protected override void InteractionAction()
@@ -24,9 +21,11 @@ public class Box : InteractableObject
         float diffX = player.position.x - transform.position.x;
         Vector3 targetPosition = new Vector3(player.position.x - diffX, 0, 0);
         print(player.position);
-      //  transform.t = targetPosition
+        transform.position = targetPosition;
         //_rb.MovePosition(_rb.position + targetPosition);
     }
+
+
 }
 
 /*

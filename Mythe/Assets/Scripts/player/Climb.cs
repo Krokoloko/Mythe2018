@@ -34,7 +34,7 @@ public class Climb : MonoBehaviour {
     void Update()
     {
         _ladders = GameObject.FindGameObjectsWithTag("ladder");
-        if (_ladders.Length == 0)
+        if (_ladders.Length >= 0)
         {
             RoutineSwitch();
             ClimbRoutine();

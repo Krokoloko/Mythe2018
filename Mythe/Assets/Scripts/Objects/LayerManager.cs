@@ -36,7 +36,6 @@ public class LayerManager : MonoBehaviour {
             switch (_id)
             {
                 case "Player":
-                    Debug.Log("object is player");
                     if (gameObject.GetComponent<Climb>().state != Climb.ClimbState.none)
                     {
                         switch (gameObject.GetComponent<Climb>().state)
@@ -53,11 +52,13 @@ public class LayerManager : MonoBehaviour {
                                 gameObject.layer = 20;
                                 break;
                         }
+                        break;
                     }
                     else
                     {
                         gameObject.layer = 0;
                     }
+                    
                     switch (gameObject.GetComponent<Jump>().state)
                     {
                         case Jump.jumpState.rising:

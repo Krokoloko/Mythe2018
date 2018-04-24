@@ -11,6 +11,8 @@ TagManager:
   - MoveAble
   - Enemy
   - RightBound
+  - leftWall
+  - ladder
   layers:
   - Default
   - TransparentFX
@@ -21,6 +23,7 @@ TagManager:
   - 
   - 
   - 
+  - pastThroughPlatform
   - 
   - 
   - 
@@ -31,8 +34,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - player
   - 
   - 
   - 

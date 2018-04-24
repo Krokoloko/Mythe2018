@@ -35,7 +35,9 @@ public class LevelManager : MonoBehaviour {
 
     void Update()
     {
+        AdjustPos();
         //Is it at the end of the level so that the next level can spawn
+        Debug.Log("_rightEnd: " + _rightEnd.transform.position + " - " + "player: " + GameObject.FindGameObjectWithTag("Player").transform.position);
         if ((_rightEnd.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position).sqrMagnitude < radius * radius && !_switch)
         {
             Debug.Log("in range");
@@ -84,10 +86,21 @@ public class LevelManager : MonoBehaviour {
       
         }
     }
+    //Adjusts to the player position
+    private void AdjustPos()
+    {
+        _leftEnd.transform.TransformPoint(_leftEnd.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
+        _rightEnd.transform.TransformPoint(_leftEnd.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
+    }
 
     //Reinits the boundries from the next level.
     private void SetBoundries()
     {
+        _leftBoundry = GameObject.FindGameObjectWithTag("LeftBound").transform;
+        _rightBoundry = GameObject.FindGameObjectWithTag("RightBound").transform;
+        _leftEnd = GameObject.FindGameObjectWithTag("leftEnd").transform;
+        _rightEnd = GameObject.FindGameObjectWithTag("rightEnd").transform;
+        /*
         for (int i = 0; i < levels[_level].transform.childCount; i++)
         {
             if (levels[_level].transform.GetChild(i).CompareTag("LeftBound"))
@@ -106,6 +119,6 @@ public class LevelManager : MonoBehaviour {
             {
                 _rightEnd = levels[_level].transform.GetChild(i).transform;
             }
-        }
+        }*/
     }
 }
