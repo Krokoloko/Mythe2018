@@ -18,9 +18,14 @@ void OnTriggerStay(Collider col)
 
         }
     }
-void OnTriggerExit()
+void OnTriggerExit(Collider col)
     {
-        active = false;
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "MoveAble" || col.gameObject.tag == "ThrowObject" || col.gameObject.tag == "Enemy")
+        {
+            active = false;
+            print("nuuo");
+
+        }
     }
 
 

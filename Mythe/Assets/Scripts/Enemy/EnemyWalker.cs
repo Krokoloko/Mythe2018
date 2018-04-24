@@ -11,6 +11,7 @@ public class EnemyWalker : Enemy {
     public float deathYPos;
     public bool spooked;
 
+    private EnemyAnimationController _animator;
     private Vector3 _orgPos;
     private bool _suprised = false;
     private bool _grounded;
@@ -20,6 +21,7 @@ public class EnemyWalker : Enemy {
     void Start()
     {
         base.rb = GetComponent<Rigidbody>();
+        _animator = new EnemyAnimationController("idle",gameObject);
         _orgPos = transform.position;
     }
 
@@ -28,6 +30,7 @@ public class EnemyWalker : Enemy {
         _dir = left ? -1 : 1;
 
         Vector3 dirRay = new Vector3(_dir, 0, 0);
+        _scoutRay = new Ray(transform.position, dirRay);
         //Debug.Log("EnemyState = " + base.State);
         //Debug.Log("Grounded = " + _grounded);
         Debug.DrawRay(_scoutRay.origin, _scoutRay.direction, Color.yellow);
@@ -56,12 +59,18 @@ public class EnemyWalker : Enemy {
 
         switch (base.State)
         {
+            case EnemyState.none:
+                _animator.AnimatorSwitchTo("idle");
+                State = EnemyState.idle;
+                break;
             case EnemyState.idle:
                 RaycastHit _hitIdl;
+                Debug.DrawLine(_scoutRay.origin, _scoutRay.direction*viewDistance);
                 if (Physics.Raycast(_scoutRay, out _hitIdl))
                 {
                     if (_hitIdl.collider.gameObject.tag == "Player" && _hitIdl.distance < viewDistance)
                     {
+                        _animator.AnimatorSwitchTo("spooked");
                         base.rb.AddForce(Vector3.up * 2,ForceMode.VelocityChange);
                         base.State = EnemyState.moving;
                         spooked = true;
@@ -75,8 +84,10 @@ public class EnemyWalker : Enemy {
                     //Debug.Log("dist = " + _hitMov.distance + "  tag = " + _hitMov.collider.tag);
                     if (_grounded)
                     {
+                        _animator.AnimatorSwitchTo("moving");
                         if (_hitMov.collider.gameObject.tag != "Player" || _hitMov.distance > viewDistance)
                         {
+                            _animator.AnimatorSwitchTo("idle");
                             base.State = EnemyState.idle;
                         }
                     }
@@ -86,9 +97,7 @@ public class EnemyWalker : Enemy {
                     base.State = EnemyState.idle;
                 }
                 break;
-            case EnemyState.none:
-                State = EnemyState.idle;
-                break;
+           
         }
     }
 
@@ -106,6 +115,7 @@ public class EnemyWalker : Enemy {
                 }
                 break;
             case EnemyState.idle:
+                _animator.AnimatorSwitchTo("idle");
                 base.rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
                 break;
         }
@@ -156,6 +166,7 @@ public class EnemyWalker : Enemy {
     
     private bool OnDeathLocation()
     {
+        Debug.Log(transform.position.y - _orgPos.y);
         if (transform.position.y < _orgPos.y - Mathf.Abs(deathYPos))
         {
             return true;

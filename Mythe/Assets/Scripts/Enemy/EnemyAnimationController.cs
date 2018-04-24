@@ -7,38 +7,26 @@ public class EnemyAnimationController : MonoBehaviour {
     private Animator _animator;
     private AnimatorStateInfo _currentAnimationInfo;
     private EnemyWalker _enemy;
+    private string _currentAnimation;
 
-	void Start ()
+    public EnemyAnimationController(string startAnim,GameObject enemy)
     {
-        _enemy = GetComponent<EnemyWalker>();
-        _animator = GetComponent<Animator>();
-	}
-	
-	void Update ()
+        _enemy = enemy.GetComponent<EnemyWalker>();
+        _animator = enemy.GetComponent<Animator>();
+        _currentAnimation = startAnim;
+        _currentAnimationInfo = _animator.GetCurrentAnimatorStateInfo(0);
+    }
+
+    public void AnimatorSwitchTo(string str)
     {
         _currentAnimationInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorSwitch();
-	}
-
-    private void AnimatorSwitch()
-    {
-        switch (_enemy.State)
+        if (_currentAnimation != str)
         {
-            case Enemy.EnemyState.idle:
-                _animator.SetTrigger("idle");
-                if (_enemy.spooked == true)
-                {
-                    _animator.ResetTrigger("idle");
-                    _animator.SetTrigger("spooked");
-                }
-                break;
-            case Enemy.EnemyState.moving:
-                if (_enemy.spooked == false)
-                {
-                    _animator.ResetTrigger("spooked");
-                    _animator.SetTrigger("moving");
-                }
-                break;
+            _animator.ResetTrigger(_currentAnimation);
+
+            _currentAnimation = str;
+
+            _animator.SetTrigger(str);
         }
-    }
+    } 
 }
