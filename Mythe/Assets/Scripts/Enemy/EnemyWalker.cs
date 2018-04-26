@@ -20,6 +20,7 @@ public class EnemyWalker : Enemy {
 
     void Start()
     {
+        base.spriteRend = GetComponent<SpriteRenderer>();
         base.rb = GetComponent<Rigidbody>();
         _animator = new EnemyAnimationController("idle",gameObject);
         _orgPos = transform.position;
@@ -28,6 +29,8 @@ public class EnemyWalker : Enemy {
     void Update()
     {
         _dir = left ? -1 : 1;
+        base.spriteRend.flipX = !left;
+
 
         Vector3 dirRay = new Vector3(_dir, 0, 0);
         _scoutRay = new Ray(transform.position, dirRay);
@@ -55,6 +58,14 @@ public class EnemyWalker : Enemy {
         if (base.rb.velocity.y >= 0.01f)
         {
             AirState = EnemyAirState.midair;
+        }
+        if(base.AirState == EnemyAirState.midair && base.rb.velocity.y <= 0.01f)
+        {
+            AirState = EnemyAirState.falling;
+        }
+        if(base.AirState == EnemyAirState.landing)
+        {
+            base.AirState = EnemyAirState.none;
         }
 
         switch (base.State)
@@ -153,7 +164,7 @@ public class EnemyWalker : Enemy {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.distance <= (GetComponent<SpriteRenderer>().sprite.rect.height / 2))
+            if (hit.distance <= (GetComponent<SpriteRenderer>().sprite.rect.height/2))
             {
                 //if (hit.collider.gameObject.layer == 0 || hit.collider.gameObject.layer == 9)
                 //{
