@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyWalker : Enemy {
 
     public float walkSpeed;
-    public GameObject[] location = new GameObject[2];
     public bool left;
     public float viewDistance;
     public float deathYPos;
@@ -22,6 +21,7 @@ public class EnemyWalker : Enemy {
     {
         base.spriteRend = GetComponent<SpriteRenderer>();
         base.rb = GetComponent<Rigidbody>();
+        spooked = false;
         _animator = new EnemyAnimationController("idle",gameObject);
         _orgPos = transform.position;
     }
@@ -177,7 +177,7 @@ public class EnemyWalker : Enemy {
     
     private bool OnDeathLocation()
     {
-        Debug.Log(transform.position.y - _orgPos.y);
+        //Debug.Log(transform.position.y - _orgPos.y);
         if (transform.position.y < _orgPos.y - Mathf.Abs(deathYPos))
         {
             return true;

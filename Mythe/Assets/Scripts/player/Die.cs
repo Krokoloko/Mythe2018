@@ -32,7 +32,7 @@ public class Die : MonoBehaviour {
 
 	private bool OnDeathLocation()
 	{
-		Debug.Log(transform.position.y - _orgHeight);
+		//Debug.Log(transform.position.y - _orgHeight);
 
 		if (transform.position.y < _orgHeight - Mathf.Abs(deathHeight))
 			return true;

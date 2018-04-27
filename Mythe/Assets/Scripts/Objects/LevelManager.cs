@@ -13,9 +13,10 @@ public class LevelManager : MonoBehaviour {
     [Header("Within the range the level is going to load.")]
     public float radius;
 
-    private GameObject _currentLevel, _levelToDestroy;
+    private GameObject _currentLevel;
+    public GameObject _levelToDestroy;
     private TranslateNextLevel _cameraTransition;
-    private Transform _leftBoundry, _rightBoundry, _leftEnd, _rightEnd, _playerSpawn;
+    public Transform _leftBoundry, _rightBoundry, _leftEnd, _rightEnd, _playerSpawn;
     private Sprite _playerSprite;
     private bool _switch = false;
     private int _level;
@@ -34,22 +35,28 @@ public class LevelManager : MonoBehaviour {
 
     void Update()
     {
+        
         AdjustPos();
+        
         //Is it at the end of the level so that the next level can spawn
-        Debug.Log("_rightEnd: " + _rightEnd.transform.position + " - " + "player: " + GameObject.FindGameObjectWithTag("Player").transform.position);
+        //Debug.Log("_rightEnd: " + _rightEnd.transform.position + " - " + "player: " + GameObject.FindGameObjectWithTag("Player").transform.position);
         if ((_rightEnd.transform.position - GameObject.FindGameObjectWithTag("Player").transform.position).sqrMagnitude < radius * radius && !_switch)
         {
-            Debug.Log("in range");
+            Debug.Log(gameObject+" in range");
             _switch = true;
             GoToNextLevel();
             _cameraTransition.ReplaceCameraValues();
         }
+
+        Debug.Log("switch" + _switch);
         //Is the player far enough from the previous level so it can be despawned.
-        if (GameObject.FindGameObjectWithTag("Player").transform.position.x > _rightEnd.position.x + _playerSprite.rect.width && _switch)
+        if (
+            GameObject.FindGameObjectWithTag("Player").transform.position.x > _rightEnd.position.x + radius + _playerSprite.rect.width &&
+            _switch)
         {
-            Debug.Log(_levelToDestroy);
+            Debug.Log(gameObject + " out range");
+
             Destroy(_levelToDestroy);
-            Debug.Log("out range");
             if (GameObject.FindGameObjectsWithTag("LeftBound").Length == 1)
             {
                 Debug.Log("previous level is destroyed");
@@ -88,6 +95,7 @@ public class LevelManager : MonoBehaviour {
     //Adjusts to the player position
     private void AdjustPos()
     {
+        IfTransformsNull();
         _leftEnd.transform.TransformPoint(_leftEnd.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
         _rightEnd.transform.TransformPoint(_leftEnd.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, GameObject.FindGameObjectWithTag("Player").transform.position.z);
     }
@@ -111,23 +119,15 @@ public class LevelManager : MonoBehaviour {
         _rightEnd = GameObject.FindGameObjectWithTag("rightEnd").transform;
         _playerSpawn = GameObject.FindGameObjectWithTag("playerSpawnPoint").transform;
     }
-    private void SetBoundries(bool t)
+
+    private void IfTransformsNull()
     {
-        if (t)
+        if (_leftEnd == null && _rightEnd == null && _leftBoundry == null && _rightBoundry == null && _playerSpawn == null)
         {
-            _leftBoundry = _currentLevel.FindGameObjectWithTag("LeftBound").transform;
-            _rightBoundry = GameObject.FindGameObjectWithTag("RightBound").transform;
-            _leftEnd = GameObject.FindGameObjectWithTag("leftEnd").transform;
-            _rightEnd = GameObject.FindGameObjectWithTag("rightEnd").transform;
-            _playerSpawn = GameObject.FindGameObjectWithTag("playerSpawnPoint").transform;
-        }
-        else
-        {
-            _leftBoundry = GameObject.FindGameObjectWithTag("LeftBound").transform;
-            _rightBoundry = GameObject.FindGameObjectWithTag("RightBound").transform;
-            _leftEnd = GameObject.FindGameObjectWithTag("leftEnd").transform;
-            _rightEnd = GameObject.FindGameObjectWithTag("rightEnd").transform;
-            _playerSpawn = GameObject.FindGameObjectWithTag("playerSpawnPoint").transform;
+            SetBoundries();
+            _cameraTransition = new TranslateNextLevel(_leftBoundry, _rightBoundry, _playerSpawn, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMovement>());
+
+            _cameraTransition.ReplaceCameraValues();
         }
     }
 }

@@ -20,15 +20,14 @@ public class Ball : InteractableObject
 
     protected override void InteractionEnd()
     {
-        Vector3 right = new Vector3(player.position.x + player.localScale.x/ 2f, player.position.y,player.position.z);
-        Vector3 left = new Vector3(player.position.x - player.localScale.x / 2f, player.position.y, player.position.z);
-
-        if (CheckSideRaycast(left))
+        Debug.Log("lost ball touch");
+        if (CheckSideRaycast(player.transform.position))
         {
+
             Debug.Log("Player is throwing to the right side");
             this.GetComponent<Rigidbody>().AddForce(new Vector3(-0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
         }
-        else if (CheckSideRaycast(right))
+        else
         {
             Debug.Log("Player is throwing to the left side");
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
@@ -52,11 +51,6 @@ public class Ball : InteractableObject
     {
         if (origin.x > this.transform.position.x)
             return true;
-
-        if (origin.x < this.transform.position.x)
-            return false;
-
-        Debug.Log("Neither were true so i say false");
-        return false;
+        else return false;
     }
 }

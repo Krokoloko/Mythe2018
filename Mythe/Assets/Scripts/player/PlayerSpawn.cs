@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerSpawn : MonoBehaviour {
     private bool dead = false;
     private GameObject _player;
+    [Tooltip("Hoeft geen waarde mee te geven.")]
     public GameObject levelManager;
+    [Tooltip("Transform moet transform van zich zelf zijn.")]
     public Transform SpawnPoint;
     
 	void Start()

@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         transform.position = target.position + offset;
-        Debug.Log("clamp = " + Mathf.Clamp(player.position.x, leftBound.position.x, rightBound.position.x) + " leftBound = " + leftBound.position.x + " rightBound = " + rightBound.position.x);
+        //Debug.Log("clamp = " + Mathf.Clamp(player.position.x, leftBound.position.x, rightBound.position.x) + " leftBound = " + leftBound.position.x + " rightBound = " + rightBound.position.x);
         transform.position = new Vector3( Mathf.Clamp(player.position.x, leftBound.position.x, rightBound.position.x), transform.position.y, transform.position.z);
     }
 }

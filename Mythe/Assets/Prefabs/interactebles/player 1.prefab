@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114107389336365160}
   - component: {fileID: 114570569787544334}
   - component: {fileID: 114463024629088920}
+  - component: {fileID: 114328779875585346}
   - component: {fileID: 95995386811511404}
   m_Layer: 20
   m_Name: player 1
@@ -123,6 +124,18 @@ MonoBehaviour:
   crawlMultiplier: 0.5
   collisionMultiplier: 0.5
   crawlSpeedMultiplier: 0.3
+--- !u!114 &114328779875585346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825938598834782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a846c06fb0c71af499ce6f27c0823df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathHeight: 10
 --- !u!114 &114390226238446946
 MonoBehaviour:
   m_ObjectHideFlags: 1
