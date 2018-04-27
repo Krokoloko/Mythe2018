@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/menu.unity
     guid: 669964250ed9e4b4fa8dac2443beb403
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene_Volken.unity
     guid: ab3280bcc0acdd34892f3384418f5413
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: b8fe2afd848939848bf383a44a6393a0
