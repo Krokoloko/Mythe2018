@@ -5,24 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSpawn : MonoBehaviour {
     private bool dead = false;
-    public GameObject player;
+    private GameObject _player;
+    public GameObject levelManager;
     public Transform SpawnPoint;
-     void Start()
-    {
-        player.transform.position = SpawnPoint.transform.position;
-    }
     
-    void OnCollisionEnter(Collision other)
+	void Start()
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Destroy(gameObject);
-            dead = true;
-        }
-        if (dead)
-        {
-            //Application.LoadLevel(Application.loadedLevel);
-            SceneManager.LoadScene(1);
-        }
+        levelManager = GameObject.FindGameObjectWithTag("levelManager");
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _player.transform.position = SpawnPoint.transform.position;
     }
+
+	public void OnDead()	
+	{
+		levelManager.GetComponent<LevelManager> ().Reload ();
+		_player.transform.position = SpawnPoint.position;
+	}
 }

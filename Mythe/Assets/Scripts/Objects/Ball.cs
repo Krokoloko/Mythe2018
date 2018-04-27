@@ -20,7 +20,19 @@ public class Ball : InteractableObject
 
     protected override void InteractionEnd()
     {
-       
+        Vector3 right = new Vector3(player.position.x + player.localScale.x/ 2f, player.position.y,player.position.z);
+        Vector3 left = new Vector3(player.position.x - player.localScale.x / 2f, player.position.y, player.position.z);
+
+        if (CheckSideRaycast(left))
+        {
+            Debug.Log("Player is throwing to the right side");
+            this.GetComponent<Rigidbody>().AddForce(new Vector3(-0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
+        }
+        else if (CheckSideRaycast(right))
+        {
+            Debug.Log("Player is throwing to the left side");
+            this.GetComponent<Rigidbody>().AddForce(new Vector3(0.4f, 1.1f, 0) * throwforce, ForceMode.Impulse);
+        }
     }
 
     protected override bool ReasonInteraction()
@@ -35,5 +47,16 @@ public class Ball : InteractableObject
     {
         Vector3 targetPosition = new Vector3(player.position.x - offset, transform.position.y, transform.position.z);
         transform.position = targetPosition;
+    }
+    private bool CheckSideRaycast(Vector3 origin)
+    {
+        if (origin.x > this.transform.position.x)
+            return true;
+
+        if (origin.x < this.transform.position.x)
+            return false;
+
+        Debug.Log("Neither were true so i say false");
+        return false;
     }
 }
