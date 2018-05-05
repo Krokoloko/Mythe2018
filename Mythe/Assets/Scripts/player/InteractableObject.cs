@@ -10,7 +10,6 @@ public abstract class InteractableObject : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("im touching");
             if (Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.LeftShift))
             {
                 player = other.transform;
@@ -21,13 +20,19 @@ public abstract class InteractableObject : MonoBehaviour
 
     protected abstract bool ReasonInteraction();
     protected abstract void InteractionAction();
+    protected abstract void InteractionStart();
+    protected abstract void InteractionEnd();
 
     private IEnumerator StartInteraction()
     {
+        InteractionStart();
+
         while (ReasonInteraction())
         {
             InteractionAction();
             yield return null;
         }
+
+        InteractionEnd();
     }
 }

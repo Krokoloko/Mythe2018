@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Scene_Mikal.unity
+=======
+- path: Assets/Scenes/Scene_Daan.unity
+>>>>>>> 51ec11dd8b20a19f4c75e244a8b209a3cff0af09
   isLoaded: 1
   isActive: 1

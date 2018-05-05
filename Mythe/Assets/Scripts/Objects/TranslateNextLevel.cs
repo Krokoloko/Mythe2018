@@ -12,6 +12,13 @@ public class TranslateNextLevel : MonoBehaviour {
         _camera = camera;
         _level = level;
     }
+    public TranslateNextLevel(Transform leftBound, Transform rightBound, Transform playerSpawn,CameraMovement camera)
+    {
+        _camera = camera;
+        _camera.leftBound = leftBound;
+        _camera.rightBound = rightBound;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSpawn>().SpawnPoint = playerSpawn;
+    }
 
     public void ReplaceCameraValues()
     {

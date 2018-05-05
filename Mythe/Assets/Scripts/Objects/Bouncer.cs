@@ -19,7 +19,6 @@ public class Bouncer : MonoBehaviour
     {
         if (_button.active)
         {
-            Debug.Log("dave is erg gay");
         
         ApplyBounce();
         }

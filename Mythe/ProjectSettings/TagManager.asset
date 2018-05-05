@@ -13,6 +13,8 @@ TagManager:
   - RightBound
   - leftWall
   - ladder
+  - playerSpawnPoint
+  - levelManager
   layers:
   - Default
   - TransparentFX
