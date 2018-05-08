@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/menu.unity
-=======
-- path: Assets/Scenes/Lvl 1.unity
->>>>>>> 5c725d1165d4434431b4e82392fff4ea2f22ab98
+- path: Assets/Scenes/Lvl 1 gefixde functionaliteit.unity
   isLoaded: 1
   isActive: 1
